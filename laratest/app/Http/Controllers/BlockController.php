@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Block;
 use App\Topic;
 use Illuminate\Http\Request;
@@ -25,7 +26,10 @@ class BlockController extends Controller
      */
     public function create()
     {
-        //
+        if (!Auth::check())
+        {
+            return redirect('login');
+        }
         $topics = Topic::all()->pluck("topicname", "id");
         $page = "Добавление блока";
         $block = new Block;
@@ -76,6 +80,10 @@ class BlockController extends Controller
      */
     public function edit($id)
     {
+        if (!Auth::check())
+        {
+            return redirect('login');
+        }
         $block = Block::find($id);
         $page = "Добавление блока";
         $topics = Topic::pluck("topicname", "id");
@@ -91,6 +99,10 @@ class BlockController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!Auth::check())
+        {
+            return redirect('login');
+        }
         $block = Block::find($id);
         $block->topicid = $request->topicid;
         $block->title = $request->title;
@@ -119,6 +131,10 @@ class BlockController extends Controller
      */
     public function destroy($id)
     {
+        if (!Auth::check())
+        {
+            return redirect('login');
+        }
         $block = Block::find($id);
         $block->delete();
         return redirect("topic");

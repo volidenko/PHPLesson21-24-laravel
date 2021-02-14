@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Block;
 use App\Topic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TopicController extends Controller
 {
@@ -29,7 +30,10 @@ class TopicController extends Controller
      */
     public function create()
     {
-        //
+        if (!Auth::check())
+        {
+            return redirect('login');
+        }
         $topic = new Topic;
         $page = "Добавление раздела";
         return view("topic.create", array("topic"=>$topic, "page"=>$page));

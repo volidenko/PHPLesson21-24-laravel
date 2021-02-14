@@ -41,7 +41,6 @@ class CreateTables extends Migration
      */
     public function down()
     {
-        //Schema::dropIfExists('tables');
         Schema::dropIfExists('topics');
         Schema::dropIfExists('blocks');
     }

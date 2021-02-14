@@ -1,4 +1,7 @@
 <?php
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +24,6 @@ Route::get("test/show", "TestController@show");
 
 Route::resource('topic', 'TopicController');
 Route::resource('block', 'BlockController');
+Auth::routes();
+
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
